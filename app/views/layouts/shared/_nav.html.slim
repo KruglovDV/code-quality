@@ -1,0 +1,9 @@
+.container.mb-2
+  .d-flex.flex-wrap.align-items-center.py-2.border-bottom
+    .navbar.navbar-expand-md.navbar-light.me-auto
+
+    ul.nav.nav-pills
+      li.nav-item.me-2
+        = link_to auth_request_path(:github), method: :post do
+          span.me-2 = t('.sign_in')
+          i.fa-brands.fa-github
