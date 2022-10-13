@@ -1,0 +1,8 @@
+en:
+  web:
+    auth:
+      callback:
+        signed_in: You successfully signed in
+        cant_sign_in: Can't sign in
+      sign_out:
+        signed_out: You successfully signed out

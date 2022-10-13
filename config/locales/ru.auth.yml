@@ -1,0 +1,8 @@
+ru:
+  web:
+    auth:
+      callback:
+        signed_in: Вы успешно вошли
+        cant_sign_in: Неуспешная попытка входа
+      sign_out:
+        signed_out: Вы успешно вышли

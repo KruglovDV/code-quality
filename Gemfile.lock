@@ -104,6 +104,8 @@ GEM
     hashie (5.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    i18n-debug (1.2.0)
+      i18n (< 2)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -288,6 +290,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   dotenv-rails
   flash_rails_messages
+  i18n-debug
   jbuilder (~> 2.7)
   listen (~> 3.3)
   omniauth

@@ -1,0 +1,6 @@
+ru:
+  layouts:
+    shared:
+      nav:
+        sign_in: Вход
+        sign_out: Выход

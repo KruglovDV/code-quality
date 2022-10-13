@@ -4,6 +4,9 @@
 
     ul.nav.nav-pills
       li.nav-item.me-2
-        = link_to auth_request_path(:github), method: :post do
-          span.me-2 = t('.sign_in')
-          i.fa-brands.fa-github
+        - if signed_in?
+          = link_to t('.sign_out'), sign_out_path, method: :delete
+        - else
+          = link_to auth_request_path(:github), method: :post do
+            span.me-2 = t('.sign_in')
+            i.fa-brands.fa-github
