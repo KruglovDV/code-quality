@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Web
   class AuthController < ApplicationController
     def callback
@@ -17,7 +19,7 @@ module Web
       destroy_session
       redirect_to root_path, notice: t('.signed_out')
     end
-    
+
     private
 
     def user_params

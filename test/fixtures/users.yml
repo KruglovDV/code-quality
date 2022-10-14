@@ -1,11 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+sam:
+  nickname: sam
+  email: sam@user.com
+  token: token
 
-one:
-  email: MyString
-  nickname: MyString
-  token: MyString
-
-two:
-  email: MyString
-  nickname: MyString
-  token: MyString
+john:
+  nickname: John
+  email: john@doe.com
+  token: token
