@@ -1,0 +1,14 @@
+ru:
+  web:
+    repositories:
+      index:
+        header: Repositories
+        new: New
+        name: Name
+        language: Language
+        last_check: Last check
+      new:
+        header: Repository creation
+      create:
+        repository_created: Repository created
+        repository_name_required: Repository name is required

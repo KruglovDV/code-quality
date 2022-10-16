@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    models:
+      repository: Repository
+    attributes:
+      repository:
+        name: Repository name

@@ -1,0 +1,14 @@
+ru:
+  web:
+    repositories:
+      index:
+        header: Репозитории
+        new: Создать
+        name: Название
+        language: Язык
+        last_check: Последняя проверка
+      new:
+        header: Создание репозитория
+      create:
+        repository_created: Репозиторий создан
+        repository_name_required: Заполните название репозитория

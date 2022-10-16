@@ -1,0 +1,7 @@
+ru:
+  activerecord:
+    models:
+      repository: Репозиторий
+    attributes:
+      repository:
+        name: Название репозитория

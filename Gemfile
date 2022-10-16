@@ -36,6 +36,9 @@ gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'rollbar'
 gem 'faker'
+gem 'simple_form'
+gem 'enumerize'
+gem 'octokit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -62,6 +65,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'minitest-power_assert'
   gem 'webdrivers'
 end
 

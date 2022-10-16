@@ -1,0 +1,9 @@
+en:
+  web:
+    home:
+      index:
+        header: Github repository quality analyzer
+        content: |-
+          A service where teams can track the quality of their public repositories.
+          Repositories are connected to the project, which are then checked through the github check mechanism.
+          The result is displayed both in the github interface and on the service itself.

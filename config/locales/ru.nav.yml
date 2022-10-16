@@ -4,3 +4,5 @@ ru:
       nav:
         sign_in: Вход
         sign_out: Выход
+        home: Домой
+        repositories: Репозитории

@@ -1,0 +1,16 @@
+.p-4.align-items-center.border.shadow.bg-white.rounded-3
+  .mb-4
+    h1 = t('.header')
+  = link_to t('.new'), new_repository_path, class: 'btn btn-primary mb-3'
+  table.table.table-striped.table-hover.mt-4
+    thead
+      tr
+        th = t('.name')
+        th = t('.language')
+        th = t('.last_check')
+    tbody
+      - @repositories.each do |repository|
+        tr
+          td = repository.name
+          td = repository.language
+          td

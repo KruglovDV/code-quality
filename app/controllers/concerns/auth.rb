@@ -18,6 +18,6 @@ module Auth
   end
 
   def authenticate_user!
-    redirect_to root_path, alert: t('.please_sign_in') if current_user.nil?
+    redirect_to root_path, alert: t('common.please_sign_in') if current_user.nil?
   end
 end
