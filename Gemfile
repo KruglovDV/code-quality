@@ -39,6 +39,7 @@ gem 'faker'
 gem 'simple_form'
 gem 'enumerize'
 gem 'octokit'
+gem 'slim-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -67,6 +68,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'minitest-power_assert'
   gem 'webdrivers'
+  gem 'webmock'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

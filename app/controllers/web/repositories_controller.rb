@@ -11,7 +11,9 @@ module Web
     def new
       @repository = Repository.new
       client = ::Octokit::Client.new access_token: current_user.token, auto_paginate: true
-      @user_repositories = client.repos
+      @user_repositories = client.repos.filter do |repo|
+        Repository.language.values.include? repo[:language]
+      end
     end
 
     def create

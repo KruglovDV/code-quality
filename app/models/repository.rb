@@ -7,5 +7,5 @@ class Repository < ApplicationRecord
 
   validates :name, presence: true
 
-  enumerize :language, in: %i[javascript], default: :javascript
+  enumerize :language, in: %i[JavaScript], default: :JavaScript
 end

@@ -85,6 +85,8 @@ GEM
       xpath (~> 3.2)
     childprocess (4.1.0)
     concurrent-ruby (1.1.10)
+    crack (0.4.5)
+      rexml
     crass (1.0.6)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
@@ -105,6 +107,7 @@ GEM
       rails (>= 5.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hashdiff (1.0.1)
     hashie (5.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -257,6 +260,10 @@ GEM
     slim (4.1.0)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 2.0.6, < 2.1)
+    slim-rails (3.5.1)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 5.0)
     slim_lint (0.22.1)
       rubocop (>= 0.78.0)
       slim (>= 3.0, < 5.0)
@@ -288,6 +295,10 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
+    webmock (3.18.1)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     webpacker (5.4.3)
       activesupport (>= 5.2)
       rack-proxy (>= 0.6.1)
@@ -329,6 +340,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   simple_form
+  slim-rails
   slim_lint
   spring
   sqlite3 (~> 1.4)
@@ -336,6 +348,7 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 4.1.0)
   webdrivers
+  webmock
   webpacker (~> 5.0)
 
 RUBY VERSION
