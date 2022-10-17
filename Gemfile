@@ -30,15 +30,15 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 5.2.1'
+gem 'enumerize'
+gem 'faker'
 gem 'flash_rails_messages'
+gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'rollbar'
-gem 'faker'
 gem 'simple_form'
-gem 'enumerize'
-gem 'octokit'
 gem 'slim-rails'
 
 group :development, :test do

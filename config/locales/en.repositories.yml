@@ -12,3 +12,4 @@ ru:
       create:
         repository_created: Repository created
         repository_name_required: Repository name is required
+        repository_not_found: Repository not found

@@ -10,14 +10,22 @@ module Web
 
     def new
       @repository = Repository.new
-      client = ::Octokit::Client.new access_token: current_user.token, auto_paginate: true
-      @user_repositories = client.repos.filter do |repo|
-        Repository.language.values.include? repo[:language]
-      end
+      @user_repositories = user_repositories
     end
 
     def create
-      @repository = current_user.repositories.build(repository_params)
+      @current_repository = user_repositories.find do |repo|
+        repo[:full_name] == repository_params[:name]
+      end
+
+      if @current_repository.nil?
+        return redirect_to new_repository_path, alert: t('.repository_not_found')
+      end
+
+      @repository = current_user.repositories.build({
+                                                      name: @current_repository[:name],
+                                                      language: @current_repository[:language]
+                                                    })
 
       if @repository.save
         redirect_to repositories_path, notice: t('.repository_created')
@@ -30,6 +38,12 @@ module Web
 
     def repository_params
       params.require(:repository).permit(:name)
+    end
+
+    def user_repositories
+      current_user.user_repositories.filter do |repo|
+        Repository.language.values.include? repo[:language]
+      end
     end
   end
 end

@@ -12,3 +12,4 @@ ru:
       create:
         repository_created: Репозиторий создан
         repository_name_required: Заполните название репозитория
+        repository_not_found: Репозиторий не найден
