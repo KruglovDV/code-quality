@@ -1,3 +1,5 @@
 ru:
   common:
     please_sign_in: Пожалуйста войдите в систему
+    access_denied: Доступ запрещен
+    not_found: Не найдено

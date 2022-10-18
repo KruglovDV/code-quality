@@ -1,0 +1,7 @@
+ru:
+  date:
+    formats:
+      default: "%m/%d/%Y %H:%M:%S"
+  time:
+    formats:
+      default: "%m/%d/%Y %H:%M:%S"

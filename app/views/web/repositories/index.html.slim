@@ -11,6 +11,6 @@
     tbody
       - @repositories.each do |repository|
         tr
-          td = repository.name
+          td = link_to repository.name, repository_path(repository)
           td = repository.language
           td

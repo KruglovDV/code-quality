@@ -13,3 +13,9 @@ ru:
         repository_created: Репозиторий создан
         repository_name_required: Заполните название репозитория
         repository_not_found: Репозиторий не найден
+      show:
+        check: Проверка
+        name: Название
+        language: Язык
+        created_at: Дата создания
+        updated_at: Дата изменения

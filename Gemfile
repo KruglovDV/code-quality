@@ -40,6 +40,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'rollbar'
 gem 'simple_form'
 gem 'slim-rails'
+gem 'dry-container'
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

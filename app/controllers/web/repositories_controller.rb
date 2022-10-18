@@ -2,6 +2,8 @@
 
 module Web
   class RepositoriesController < ApplicationController
+    include Pundit::Authorization
+
     before_action :authenticate_user!
 
     def index
@@ -23,7 +25,7 @@ module Web
       end
 
       @repository = current_user.repositories.build({
-                                                      name: @current_repository[:name],
+                                                      name: @current_repository[:full_name],
                                                       language: @current_repository[:language]
                                                     })
 
@@ -32,6 +34,11 @@ module Web
       else
         redirect_to new_repository_path, alert: t('.repository_name_required')
       end
+    end
+
+    def show
+      @repository = Repository.find(params[:id])
+      authorize @repository
     end
 
     private

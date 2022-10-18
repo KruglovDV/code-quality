@@ -13,3 +13,9 @@ ru:
         repository_created: Repository created
         repository_name_required: Repository name is required
         repository_not_found: Repository not found
+      show:
+        check: Check
+        name: Name
+        language: Language
+        created_at: Created at
+        updated_at: Updated at

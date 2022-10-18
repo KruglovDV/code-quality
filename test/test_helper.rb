@@ -11,10 +11,6 @@ class ActiveSupport::TestCase
   parallelize(workers: :number_of_processors)
 
   fixtures :all
-
-  def load_fixture(filename)
-    File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
-  end
 end
 
 class ActionDispatch::IntegrationTest
