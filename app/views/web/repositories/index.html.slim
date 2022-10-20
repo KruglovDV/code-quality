@@ -13,4 +13,4 @@
         tr
           td = link_to repository.name, repository_path(repository)
           td = repository.language
-          td
+          td = last_check_status(repository)

@@ -7,7 +7,7 @@ module Web
     before_action :authenticate_user!
 
     def index
-      @repositories = current_user.repositories
+      @repositories = current_user.repositories.joins(:checks)
     end
 
     def new
@@ -30,6 +30,8 @@ module Web
                                                     })
 
       if @repository.save
+        @check = @repository.checks.create
+        RepositoryCheckerJob.perform_later(@check.id)
         redirect_to repositories_path, notice: t('.repository_created')
       else
         redirect_to new_repository_path, alert: t('.repository_name_required')
