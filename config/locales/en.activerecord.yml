@@ -5,3 +5,8 @@ en:
     attributes:
       repository:
         name: Repository name
+      repository/check:
+        state/created: Created
+        state/checking: Checking
+        state/failed: Failed
+        state/succeeded: Succeeded

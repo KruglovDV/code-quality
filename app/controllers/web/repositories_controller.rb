@@ -7,7 +7,7 @@ module Web
     before_action :authenticate_user!
 
     def index
-      @repositories = current_user.repositories.joins(:checks)
+      @repositories = current_user.repositories.includes(:checks)
     end
 
     def new

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
     resources :repositories, only: %i[index show new create] do
       scope module: :repositories do
-        resources :checks, only: %i[create]
+        resources :checks, only: %i[create show]
       end
     end
   end

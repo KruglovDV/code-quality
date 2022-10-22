@@ -19,3 +19,6 @@ ru:
         language: Язык
         created_at: Дата создания
         updated_at: Дата изменения
+        state: Статус
+        reference: Ссылка
+        check_state: Результат проверки

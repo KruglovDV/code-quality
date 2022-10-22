@@ -8,9 +8,10 @@ class RepositoryCheckerJob < ApplicationJob
     @check.check!
     @result = ApplicationContainer[:check_repository_service].new.call(@check.repository.name)
     if @result[:success]
-      @check.update({ issues: @result[:data] })
+      @check.update(@result[:data])
       @check.success!
     else
+      @check.update({ passed: false })
       @check.fail!
     end
   end

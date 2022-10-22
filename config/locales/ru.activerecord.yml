@@ -5,3 +5,8 @@ ru:
     attributes:
       repository:
         name: Название репозитория
+      repository/check:
+        state/created: Создано
+        state/checking: Проверка
+        state/failed: Ошибка
+        state/succeeded: Завершено

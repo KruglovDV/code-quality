@@ -19,3 +19,6 @@ ru:
         language: Language
         created_at: Created at
         updated_at: Updated at
+        state: State
+        reference: Reference
+        check_state: Check passed

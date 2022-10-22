@@ -22,8 +22,8 @@ class Repository::Check < ApplicationRecord
     end
   end
 
-  def issues
-    return nil if self[:issues].nil?
+  def parsed_issues
+    return [] if self[:issues].nil?
 
     JSON.parse(self[:issues])
   end
