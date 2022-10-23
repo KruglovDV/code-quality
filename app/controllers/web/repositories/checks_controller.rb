@@ -19,6 +19,5 @@ class Web::Repositories::ChecksController < Web::ApplicationController
     @check = @repository.checks.find(params[:id])
     authorize @check
     @issues = @check.parsed_issues
-    pp @issues
   end
 end

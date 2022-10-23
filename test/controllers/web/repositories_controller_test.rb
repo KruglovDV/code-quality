@@ -16,14 +16,16 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'creates new repository' do
-    sign_in(users(:sam))
+    assert_enqueued_with(job: RepositoryCheckerJob) do
+      sign_in(users(:sam))
 
-    create_repository_params = { name: 'test_repo' }
-    post repositories_path, params: { repository: create_repository_params }
+      create_repository_params = { name: 'test_repo' }
+      post repositories_path, params: { repository: create_repository_params }
 
-    created_repository = Repository.find_by(create_repository_params)
+      created_repository = Repository.find_by(create_repository_params)
 
-    assert created_repository
-    assert_redirected_to repositories_path
+      assert created_repository
+      assert_redirected_to repositories_path
+    end
   end
 end

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
 class CheckRepositoryServiceStub
-  def call(repository_name); end
+  def call(_repository_name)
+    { success: true, data: { issues: '[]', commit: 'abc', passed: true } }
+  end
 end

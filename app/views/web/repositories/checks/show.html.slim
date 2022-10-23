@@ -29,4 +29,4 @@
           tr
             td = error["message"]
             td = error["ruleId"]
-            td = "#{error["line"]}:#{error["column"]}"
+            td = error["line"] ? "#{error["line"]}:#{error["column"]}" : ''
