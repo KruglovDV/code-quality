@@ -4,3 +4,13 @@ ru:
       checks:
         create:
           check_started: Проверка запущена
+        show:
+          got_to_repository: К репозиторию
+          check: Проверка
+          created_at: Дата создания
+          status: Статус
+          passed: Пойдено
+          issues_count: Количество ошибок
+          message: Сообщение
+          rule: Правило
+          line_column: Строка колонка

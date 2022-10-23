@@ -24,9 +24,9 @@
         th = t('.check_state')
         th = t('.created_at')
     tbody
-      - @repository.checks.each do |check|
+      - @checks.each do |check|
         tr
-          td = link_to check.id, repository_check_path(check)
+          td = link_to check.id, repository_check_path(@repository.id, check.id)
           td = check.aasm.human_state
           td = commit_link(check)
           td = check_status(check)

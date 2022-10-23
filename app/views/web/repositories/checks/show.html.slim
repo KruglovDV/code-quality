@@ -1,0 +1,32 @@
+.p-4.align-items-center.border.shadow.bg-white.rounded-3
+  = link_to t('.got_to_repository'), repository_path(@repository), class: 'btn btn-primary mb-4'
+  h1 = "#{t('.check')} ##{@check.id}"
+  table.table
+    tbody
+      tr
+        td = t('.created_at')
+        td = l @check.created_at
+      tr
+        td = t('.status')
+        td = @check.aasm.human_state
+      tr
+        td = t('.passed')
+        td = @check.passed
+      tr
+        td = t('.issues_count')
+        td = @issues.count
+  table.table.table-hover.mb-5
+    thead
+      tr
+        th = t('.message')
+        th = t('.rule')
+        th = t('.line_column')
+    tbody
+      - @issues.each do |file|
+        tr
+          td[colspan='3'] = file["filePath"]
+        - file["messages"].each do |error|
+          tr
+            td = error["message"]
+            td = error["ruleId"]
+            td = "#{error["line"]}:#{error["column"]}"

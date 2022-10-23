@@ -4,3 +4,13 @@ en:
       checks:
         create:
           check_started: Check started
+        show:
+          got_to_repository: Go to repository
+          check: Check
+          created_at: Created at
+          status: Status
+          passed: Passed
+          issues_count: Issues count
+          message: Message
+          rule: Rule
+          line_column: Line column

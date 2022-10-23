@@ -7,16 +7,16 @@ module Web
     before_action :authenticate_user!
 
     def index
-      @repositories = current_user.repositories.includes(:checks)
+      @repositories = current_user.repositories.order('updated_at DESC').includes(:checks)
     end
 
     def new
       @repository = Repository.new
-      @user_repositories = user_repositories
+      @user_repositories = user_github_repositories
     end
 
     def create
-      @current_repository = user_repositories.find do |repo|
+      @current_repository = user_github_repositories.find do |repo|
         repo[:full_name] == repository_params[:name]
       end
 
@@ -41,6 +41,7 @@ module Web
     def show
       @repository = Repository.find(params[:id])
       authorize @repository
+      @checks = @repository.checks.order('created_at DESC')
     end
 
     private
@@ -49,7 +50,7 @@ module Web
       params.require(:repository).permit(:name)
     end
 
-    def user_repositories
+    def user_github_repositories
       current_user.user_repositories.filter do |repo|
         Repository.language.values.include? repo[:language]
       end
