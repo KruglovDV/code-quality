@@ -28,23 +28,23 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'aasm'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'bootstrap', '~> 5.2.1'
+gem 'dry-container'
 gem 'enumerize'
 gem 'faker'
 gem 'flash_rails_messages'
+gem 'git'
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
+gem 'open3'
+gem 'pundit'
 gem 'rollbar'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'dry-container'
-gem 'pundit'
-gem 'git'
-gem 'aasm'
-gem 'open3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

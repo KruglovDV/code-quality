@@ -1,5 +1,7 @@
 .p-4.align-items-center.border.shadow.bg-white.rounded-3
-  = link_to t('.got_to_repository'), repository_path(@repository), class: 'btn btn-primary mb-4'
+  = link_to t('.got_to_repository'), \
+    repository_path(@repository), \
+    class: 'btn btn-primary mb-4'
   h1 = "#{t('.check')} ##{@check.id}"
   table.table
     tbody
@@ -24,9 +26,9 @@
     tbody
       - @issues.each do |file|
         tr
-          td[colspan='3'] = file["filePath"]
-        - file["messages"].each do |error|
+          td[colspan='3'] = file['filePath']
+        - file['messages'].each do |error|
           tr
-            td = error["message"]
-            td = error["ruleId"]
-            td = error["line"] ? "#{error["line"]}:#{error["column"]}" : ''
+            td = error['message']
+            td = error['ruleId']
+            td = "#{error['line']}:#{error['column']}" if error['line']
