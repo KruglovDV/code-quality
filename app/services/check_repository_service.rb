@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+require_relative './lint_strategies/strategies_factory'
+
 class CheckRepositoryService
   def initialize
-    @check_command = 'node_modules/eslint/bin/eslint.js -c .eslintrc.yml --ignore-pattern .eslintrc --format=json --ext js repository'
-    @commit_command = 'cd ./repository && git rev-parse --short HEAD'
-    @install_deps_command = 'cd ./repository && npm i -D'
-    @clear_command = 'rm -rf ./repository'
+    @repository_dir = './repository'
+    @commit_command = "cd #{@repository_dir} && git rev-parse --short HEAD"
+    @clear_command = "rm -rf #{@repository_dir}"
   end
 
   def call(repository_name)
@@ -19,17 +20,14 @@ class CheckRepositoryService
       stdout.read
     end
 
-    Open3.pipeline(@install_deps_command)
+    strategy = ::StrategiesFactory.new.build(@repository_info[:language], @repository_dir)
+    lint_result = strategy.call
 
-    stdout, exit_status = Open3.popen3(@check_command) do |_stdin, stdout, _stderr, wait_thr|
-      [stdout.read, wait_thr.value]
-    end
+    return { success: false } if lint_result[:exit_status] == 2
 
-    return { success: false } if exit_status.exitstatus == 2
+    passed = lint_result[:issues].count.zero?
 
-    passed = JSON.parse(stdout).count.zero?
-
-    { success: true, data: { issues: stdout, commit: commit, passed: passed } }
+    { success: true, data: { issues: JSON.generate(lint_result[:issues]), commit: commit, passed: passed } }
   rescue StandardError
     { success: false }
   ensure

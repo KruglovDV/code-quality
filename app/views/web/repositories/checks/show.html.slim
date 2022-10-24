@@ -26,9 +26,9 @@
     tbody
       - @issues.each do |file|
         tr
-          td[colspan='3'] = file['filePath']
-        - file['messages'].each do |error|
+          td[colspan='3'] = file['file']
+        - file['issues'].each do |error|
           tr
             td = error['message']
-            td = error['ruleId']
+            td = error['rule']
             td = "#{error['line']}:#{error['column']}" if error['line']
