@@ -20,7 +20,7 @@ class EslintStrategy
   private
 
   def prepare_issues(issues)
-    issues.map do |file|
+    parsed_issues = issues.map do |file|
       issues = []
 
       if file['messages'].count
@@ -31,10 +31,11 @@ class EslintStrategy
 
       {
         file: file['filePath'],
-        issues: file['messages'].map do |issue|
-          { message: issue['message'], rule: issue['ruleId'], line: issue['line'], column: issue['column'] }
-        end
+        issues: issues
       }
+    end
+    parsed_issues.filter do |file|
+      file[:issues].positive
     end
   end
 end

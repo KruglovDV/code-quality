@@ -2,9 +2,9 @@
 
 module Web::RepositoriesHelper
   def check_status(check)
-    return t('common.in_progress') if check.created? || check.checking?
+    return t('common.in_progress') if check&.created? || check&.checking?
 
-    check.passed
+    check&.passed
   end
 
   def last_check_status(repository)

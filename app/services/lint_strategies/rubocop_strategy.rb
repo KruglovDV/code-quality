@@ -3,8 +3,8 @@
 class RubocopStrategy
   def initialize(repository_dir)
     @repository_dir = repository_dir
-    @install_deps_command = "cd #{@repository_dir} && npm i -D"
-    @check_command = "node_modules/eslint/bin/eslint.js -c .eslintrc.yml --ignore-pattern .eslintrc --format=json --ext js #{@repository_dir}"
+    @install_deps_command = "cd #{@repository_dir} && bundle"
+    @check_command = "bundle exec rubocop --format json #{@repository_dir}"
   end
 
   def call
@@ -13,7 +13,32 @@ class RubocopStrategy
       [stdout.read, wait_thr.value]
     end
 
-    issues = JSON.parse(stdout)
+    issues = prepare_issues(JSON.parse(stdout))
     { exit_status: exit_status.exitstatus, issues: issues }
+  end
+
+  private
+
+  def prepare_issues(issues)
+    parsed_issues = issues['files'].map do |file|
+      issues = []
+      if file['offenses'].count
+        issues = file['offenses'].map do |offence|
+          {
+            message: offence['message'],
+            rule: offence['cop_name'],
+            line: offence['location']['line'],
+            column: offence['location']['column']
+          }
+        end
+      end
+      {
+        file: file['path'],
+        issues: issues
+      }
+    end
+    parsed_issues.filter do |file|
+      file[:issues].count.positive?
+    end
   end
 end
