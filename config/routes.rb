@@ -14,4 +14,8 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  scope module: :api do
+    post 'api/checks', to: 'checks#check', as: :check
+  end
 end

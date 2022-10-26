@@ -13,5 +13,6 @@ module GithubQuality
 
     config.i18n.default_locale = :ru
     config.middleware.use SetLocaleMiddleware
+    routes.default_url_options = { host: ENV.fetch('BASE_URL') }
   end
 end

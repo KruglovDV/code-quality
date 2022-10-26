@@ -32,6 +32,7 @@ module Web
       if @repository.save
         @check = @repository.checks.create
         RepositoryCheckerJob.perform_later(@check.id)
+        SetWebHookJob.perform_later(@repository.id)
         redirect_to repositories_path, notice: t('.repository_created')
       else
         redirect_to new_repository_path, alert: t('.repository_name_required')
