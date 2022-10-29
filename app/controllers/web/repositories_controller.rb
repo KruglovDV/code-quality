@@ -17,7 +17,7 @@ module Web
 
     def create
       @current_repository = user_github_repositories.find do |repo|
-        repo[:full_name] == repository_params[:name]
+        repo[:full_name] == repository_params[:full_name]
       end
 
       if @current_repository.nil?
@@ -25,7 +25,8 @@ module Web
       end
 
       @repository = current_user.repositories.build({
-                                                      name: @current_repository[:full_name],
+                                                      github_id: @current_repository[:id],
+                                                      full_name: @current_repository[:full_name],
                                                       language: @current_repository[:language]
                                                     })
 
@@ -48,7 +49,7 @@ module Web
     private
 
     def repository_params
-      params.require(:repository).permit(:name)
+      params.require(:repository).permit(:full_name)
     end
 
     def user_github_repositories

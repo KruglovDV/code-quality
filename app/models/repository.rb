@@ -6,6 +6,6 @@ class Repository < ApplicationRecord
   belongs_to :user
   has_many :checks, class_name: 'Repository::Check', dependent: :destroy
 
-  validates :name, presence: true
+  validates :full_name, presence: true
   enumerize :language, in: %i[JavaScript Ruby], default: :JavaScript
 end

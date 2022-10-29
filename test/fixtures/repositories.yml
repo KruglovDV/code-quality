@@ -1,11 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 react:
-  name: react
+  github_id: 1
+  full_name: react
   language: JavaScript
   user: sam
 
 vue:
-  name: vue
+  github_id: 2
+  full_name: vue
   language: JavaScript
   user: john

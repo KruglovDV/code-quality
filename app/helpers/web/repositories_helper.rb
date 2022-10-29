@@ -15,6 +15,6 @@ module Web::RepositoriesHelper
   def commit_link(check)
     return nil if check.commit.nil?
 
-    link_to check.commit, "https://github.com/#{check.repository.name}/commit/#{check.commit}"
+    link_to check.commit, "https://github.com/#{check.repository.full_name}/commit/#{check.commit}"
   end
 end

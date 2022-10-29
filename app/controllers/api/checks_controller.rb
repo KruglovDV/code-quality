@@ -2,7 +2,7 @@
 
 class Api::ChecksController < Api::ApplicationController
   def check
-    @repository = Repository.find_by(name: params[:repository][:full_name])
+    @repository = Repository.find_by(full_name: params[:repository][:full_name])
     @check = @repository.checks.create
     RepositoryCheckerJob.perform_later(@check.id)
     render json: {}

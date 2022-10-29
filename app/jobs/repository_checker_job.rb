@@ -6,7 +6,7 @@ class RepositoryCheckerJob < ApplicationJob
   def perform(check_id)
     @check = Repository::Check.find(check_id)
     @check.check!
-    @result = ApplicationContainer[:check_repository_service].new.call(@check.repository.name)
+    @result = ApplicationContainer[:check_repository_service].new.call(@check.repository.full_name)
     if @result[:success]
       @check.update(@result[:data])
       @check.success!
