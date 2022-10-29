@@ -9,4 +9,4 @@ en:
         aasm_state/created: Created
         aasm_state/checking: Checking
         aasm_state/failed: Failed
-        aasm_state/succeeded: Succeeded
+        aasm_state/finished: Finished

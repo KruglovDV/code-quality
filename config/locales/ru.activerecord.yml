@@ -9,4 +9,4 @@ ru:
         aasm_state/created: Создано
         aasm_state/checking: Проверка
         aasm_state/failed: Ошибка
-        aasm_state/succeeded: Завершено
+        aasm_state/finished: Завершено
