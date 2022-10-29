@@ -1,0 +1,8 @@
+react_first_check:
+  state: created
+  repository: react
+
+vue_first_check:
+  state: created
+  repository: vue
+
