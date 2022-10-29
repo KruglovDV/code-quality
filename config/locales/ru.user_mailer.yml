@@ -1,0 +1,7 @@
+ru:
+  user_mailer:
+    check_failed_email:
+      header: Репозиторий %{repository} не прошел проверку
+      information: Для того чтобы посмотреть подробнее отчет о проверке перейдите по ссылке 
+      details: подробнее
+      subject: Проверка не пройдена

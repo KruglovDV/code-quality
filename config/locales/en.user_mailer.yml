@@ -1,0 +1,7 @@
+en:
+  user_mailer:
+    check_failed_email:
+      header: Check failed for repository %{repository}
+      information: To get more details about repository check follow the link
+      details: details
+      subject: Check failed

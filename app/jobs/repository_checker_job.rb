@@ -11,6 +11,7 @@ class RepositoryCheckerJob < ApplicationJob
       @check.update(@result[:data])
       @check.success!
     else
+      UserMailer.with(check: @check).check_failed_email.deliver_later
       @check.update({ passed: false })
       @check.fail!
     end

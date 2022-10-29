@@ -65,6 +65,16 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "github_quality_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: ENV.fetch('BASE_URL') }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name: ENV.fetch('MAIL_USERNAME'),
+    password: ENV.fetch('MAIL_PASSWORD'),
+    address: ENV.fetch('MAIL_HOST'),
+    domain: ENV.fetch('MAIL_HOST'),
+    port: ENV.fetch('SMTP_PORT', '25'),
+    authentication: :cram_md5
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
