@@ -6,7 +6,7 @@ en:
       repository:
         name: Repository name
       repository/check:
-        state/created: Created
-        state/checking: Checking
-        state/failed: Failed
-        state/succeeded: Succeeded
+        aasm_state/created: Created
+        aasm_state/checking: Checking
+        aasm_state/failed: Failed
+        aasm_state/succeeded: Succeeded

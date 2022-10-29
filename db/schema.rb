@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_29_160156) do
+ActiveRecord::Schema.define(version: 2022_10_29_161008) do
 
   create_table "repositories", force: :cascade do |t|
     t.string "full_name"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2022_10_29_160156) do
   end
 
   create_table "repository_checks", force: :cascade do |t|
-    t.string "state"
+    t.string "aasm_state"
     t.text "issues"
     t.string "commit"
     t.boolean "passed"

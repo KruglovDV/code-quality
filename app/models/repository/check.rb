@@ -5,7 +5,7 @@ class Repository::Check < ApplicationRecord
 
   belongs_to :repository
 
-  aasm column: :state do
+  aasm do
     state :created, initial: true
     state :checking, :failed, :succeeded
 
