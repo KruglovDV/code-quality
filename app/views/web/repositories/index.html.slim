@@ -11,6 +11,6 @@
     tbody
       - @repositories.each do |repository|
         tr
-          td = link_to repository.full_name, repository_path(repository)
+          td = link_to repository.name, repository_path(repository)
           td = repository.language
           td = last_check_status(repository)

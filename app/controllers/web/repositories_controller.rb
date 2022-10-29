@@ -26,6 +26,7 @@ module Web
 
       @repository = current_user.repositories.build({
                                                       github_id: @current_repository[:id],
+                                                      name: @current_repository[:name],
                                                       full_name: @current_repository[:full_name],
                                                       language: @current_repository[:language]
                                                     })
