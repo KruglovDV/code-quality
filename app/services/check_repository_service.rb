@@ -23,8 +23,6 @@ class CheckRepositoryService
     strategy = ::StrategiesFactory.new.build(@repository_info[:language], @repository_dir)
     lint_result = strategy.call
 
-    return { success: false } if lint_result[:exit_status] == 2
-
     passed = lint_result[:issues].count.zero?
 
     { success: true, data: { issues: JSON.generate(lint_result[:issues]), commit: commit, passed: passed } }
