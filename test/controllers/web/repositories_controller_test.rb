@@ -16,7 +16,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'creates new repository' do
-    assert_enqueued_with(job: RepositoryCheckerJob) do
+    assert_difference('Repository::Check.count') do
       sign_in(users(:sam))
 
       create_repository_params = { full_name: 'test_repo' }

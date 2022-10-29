@@ -3,9 +3,9 @@
 require 'test_helper'
 
 class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
-  test 'creates new repository' do
+  test 'checks updated repository' do
     repository = repositories(:react)
-    assert_enqueued_with(job: RepositoryCheckerJob) do
+    assert_difference('Repository::Check.count') do
       post check_path, params: { repository: { full_name: repository.full_name } }
     end
   end
