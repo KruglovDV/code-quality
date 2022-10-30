@@ -7,7 +7,10 @@ class RepositoryCheckerJob < ApplicationJob
     @check = Repository::Check.find(check_id)
     @repository = @check.repository
     @user = @repository.user
+    puts @user.user_repositories
+    puts @repository.github_id
     @current_repository_info = @user.user_repositories.find { |repo| repo[:id] == @repository.github_id }
+    puts @current_repository_info
 
     return if @current_repository_info.nil?
 
