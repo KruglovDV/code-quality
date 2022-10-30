@@ -12,12 +12,6 @@ class CheckRepositoryService
   def call(repository_id)
     client = ApplicationContainer[:github_client].new
     @repository_info = client.repository(repository_id)
-    @repository = Repository.find_by({ github_id: repository_id })
-    @repository.update({
-                         name: @repository_info[:name],
-                         full_name: @repository_info[:full_name],
-                         language: @repository_info[:language]
-                       })
     Open3.popen3(@clear_command)
     Git.clone(@repository_info[:clone_url], 'repository')
 
@@ -30,7 +24,11 @@ class CheckRepositoryService
 
     passed = lint_result[:issues].count.zero?
 
-    { success: true, data: { issues: JSON.generate(lint_result[:issues]), commit: commit, passed: passed } }
+    { success: true, check_data: { issues: JSON.generate(lint_result[:issues]), commit: commit, passed: passed }, repository_data: {
+      name: @repository_info[:name],
+      full_name: @repository_info[:full_name],
+      language: @repository_info[:language]
+    } }
   rescue StandardError
     { success: false }
   ensure

@@ -9,7 +9,7 @@ ru:
           check: Проверка
           created_at: Дата создания
           status: Статус
-          passed: Пойдено
+          passed: Пройдено
           issues_count: Количество ошибок
           message: Сообщение
           rule: Правило

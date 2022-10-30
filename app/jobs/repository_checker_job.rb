@@ -8,7 +8,8 @@ class RepositoryCheckerJob < ApplicationJob
     @check.check!
     @result = ApplicationContainer[:check_repository_service].new.call(@check.repository.github_id)
     if @result[:success]
-      @check.update(@result[:data])
+      @check.repository.update(@result[:repository_data])
+      @check.update(@result[:check_data])
       @check.success!
     else
       UserMailer.with(check: @check).check_failed_email.deliver_later
