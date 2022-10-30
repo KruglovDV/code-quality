@@ -5,22 +5,8 @@ class RepositoryCheckerJob < ApplicationJob
 
   def perform(check_id)
     @check = Repository::Check.find(check_id)
-    @repository = @check.repository
-    @user = @repository.user
-    puts @user.user_repositories
-    puts @repository.github_id
-    @current_repository_info = @user.user_repositories.find { |repo| repo[:id] == @repository.github_id }
-    puts @current_repository_info
-
-    return if @current_repository_info.nil?
-
-    @repository.update({
-                         name: @current_repository_info[:name],
-                         full_name: @current_repository_info[:full_name],
-                         language: @current_repository_info[:language]
-                       })
     @check.check!
-    @result = ApplicationContainer[:check_repository_service].new.call(@check.repository.full_name)
+    @result = ApplicationContainer[:check_repository_service].new.call(@check.repository.github_id)
     if @result[:success]
       @check.update(@result[:data])
       @check.success!

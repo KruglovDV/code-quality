@@ -9,10 +9,15 @@ class CheckRepositoryService
     @clear_command = "rm -rf #{@repository_dir}"
   end
 
-  def call(repository_name)
+  def call(repository_id)
     client = ApplicationContainer[:github_client].new
-    @repository_info = client.repository(repository_name)
-
+    @repository_info = client.repository(repository_id)
+    @repository = Repository.find_by({ github_id: repository_id })
+    @repository.update({
+                         name: @repository_info[:name],
+                         full_name: @repository_info[:full_name],
+                         language: @repository_info[:language]
+                       })
     Open3.popen3(@clear_command)
     Git.clone(@repository_info[:clone_url], 'repository')
 
