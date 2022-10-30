@@ -8,6 +8,9 @@ class RepositoryCheckerJob < ApplicationJob
     @repository = @check.repository
     @user = @repository.user
     @current_repository_info = @user.user_repositories.find { |repo| repo[:id] == @repository.github_id }
+
+    return if @current_repository_info.nil?
+
     @repository.update({
                          name: @current_repository_info[:name],
                          full_name: @current_repository_info[:full_name],
