@@ -1,5 +1,5 @@
 = simple_form_for repository do |f|
-  = f.input :full_name, \
+  = f.input :github_id, \
     as: :select, \
-    collection: @user_repositories.pluck(:full_name)
+    collection: @user_repositories.map { |repo| [repo[:full_name], repo[:id]] }
   = f.button :submit, class: 'btn btn btn-success mt-3'

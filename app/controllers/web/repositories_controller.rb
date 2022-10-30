@@ -16,20 +16,7 @@ module Web
     end
 
     def create
-      @current_repository = user_github_repositories.find do |repo|
-        repo[:full_name] == repository_params[:full_name]
-      end
-
-      if @current_repository.nil?
-        return redirect_to new_repository_path, alert: t('.repository_not_found')
-      end
-
-      @repository = current_user.repositories.build({
-                                                      github_id: @current_repository[:id],
-                                                      name: @current_repository[:name],
-                                                      full_name: @current_repository[:full_name],
-                                                      language: @current_repository[:language]
-                                                    })
+      @repository = current_user.repositories.build(repository_params)
 
       if @repository.save
         @check = @repository.checks.create
@@ -50,7 +37,7 @@ module Web
     private
 
     def repository_params
-      params.require(:repository).permit(:full_name)
+      params.require(:repository).permit(:github_id)
     end
 
     def user_github_repositories

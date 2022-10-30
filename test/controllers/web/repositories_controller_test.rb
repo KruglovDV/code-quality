@@ -19,7 +19,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Repository::Check.count') do
       sign_in(users(:sam))
 
-      create_repository_params = { full_name: 'test_repo' }
+      create_repository_params = { github_id: 1 }
       post repositories_path, params: { repository: create_repository_params }
 
       created_repository = Repository.find_by(create_repository_params)
