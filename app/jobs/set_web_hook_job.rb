@@ -10,7 +10,7 @@ class SetWebHookJob < ApplicationJob
       @repository.full_name,
       'web',
       {
-        url: "https://#{ENV.fetch('BASE_URL', '')}#{Rails.application.routes.url_helpers.check_path}",
+        url: "https://#{ENV.fetch('BASE_URL', '')}#{Rails.application.routes.url_helpers.api_checks_path}",
         content_type: 'json'
       },
       {
