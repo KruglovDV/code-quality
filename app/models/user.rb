@@ -3,8 +3,7 @@
 class User < ApplicationRecord
   has_many :repositories, dependent: :destroy
 
-  validates :nickname, :token, presence: true
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true
 
   def user_repositories
     Rails.cache.fetch("#{cache_key_with_version}/user_repositories", expires_in: 10.minutes) do
