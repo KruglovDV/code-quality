@@ -42,7 +42,7 @@ module Web
 
     def user_github_repositories
       current_user.user_repositories.filter do |repo|
-        Repository.language.values.include? repo[:language]
+        Repository.language.find_value repo[:language]
       end
     end
   end
