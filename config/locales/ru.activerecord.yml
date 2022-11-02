@@ -10,3 +10,10 @@ ru:
         aasm_state/checking: Проверка
         aasm_state/failed: Ошибка
         aasm_state/finished: Завершено
+    errors:
+      models:
+        repository:
+          attributes:
+            github_id:
+              taken: этот репозиторий уже создан
+              blank: поле не должно быть пустым

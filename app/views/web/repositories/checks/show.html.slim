@@ -26,7 +26,7 @@
     tbody
       - @issues.each do |file|
         tr
-          td[colspan='3'] = file['file']
+          td[colspan='3'] = file_path(file['file'], @repository)
         - file['issues'].each do |error|
           tr
             td = error['message']

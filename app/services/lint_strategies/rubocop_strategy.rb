@@ -4,7 +4,7 @@ class RubocopStrategy
   def initialize(repository_dir)
     @repository_dir = repository_dir
     @install_deps_command = "cd #{@repository_dir} && bundle"
-    @check_command = "bundle exec rubocop --format json #{@repository_dir}"
+    @check_command = "bundle exec rubocop --config .rubocop.yml --format json #{@repository_dir}"
   end
 
   def call

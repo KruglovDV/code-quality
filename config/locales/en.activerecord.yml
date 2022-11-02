@@ -10,3 +10,10 @@ en:
         aasm_state/checking: Checking
         aasm_state/failed: Failed
         aasm_state/finished: Finished
+    errors:
+      models:
+        repository:
+          attributes:
+            github_id:
+              taken: This repository is already created
+              blank: field can't be blank

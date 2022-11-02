@@ -24,7 +24,8 @@ module Web
         SetWebHookJob.perform_later(@repository.id)
         redirect_to repositories_path, notice: t('.repository_created')
       else
-        redirect_to new_repository_path, alert: t('.repository_name_required')
+        @user_repositories = user_github_repositories
+        render :new, status: :unprocessable_entity
       end
     end
 

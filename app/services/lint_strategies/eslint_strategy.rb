@@ -4,7 +4,7 @@ class EslintStrategy
   def initialize(repository_dir)
     @repository_dir = repository_dir
     @install_deps_command = "cd #{@repository_dir} && npm i -D"
-    @check_command = "node_modules/eslint/bin/eslint.js -c .eslintrc.yml --ignore-pattern .eslintrc --format=json --ext js #{@repository_dir}"
+    @check_command = "node_modules/eslint/bin/eslint.js -c .eslintrc.yml --format=json --ext js #{@repository_dir}"
   end
 
   def call
@@ -20,7 +20,7 @@ class EslintStrategy
   private
 
   def prepare_issues(issues)
-    parsed_issues = issues.map do |file|
+    issues.map do |file|
       issues = []
 
       if file['messages'].count
@@ -33,9 +33,6 @@ class EslintStrategy
         file: file['filePath'],
         issues: issues
       }
-    end
-    parsed_issues.filter do |file|
-      file[:issues].positive
     end
   end
 end
