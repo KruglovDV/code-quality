@@ -14,7 +14,7 @@ module Web
     def new
       @repository = Repository.new
       @user_repositories = user_github_repositories
-      @repositories_collection = @user_repositories.map { |repo| [repo[:full_name], repo[:id]] }
+      @repositories_collection = repositories_collection(@user_repositories)
     end
 
     def create
@@ -27,6 +27,7 @@ module Web
         redirect_to repositories_path, notice: t('.repository_created')
       else
         @user_repositories = user_github_repositories
+        @repositories_collection = repositories_collection(@user_repositories)
         render :new, status: :unprocessable_entity
       end
     end
@@ -47,6 +48,10 @@ module Web
       current_user.user_repositories.filter do |repo|
         Repository.language.find_value repo[:language]
       end
+    end
+
+    def repositories_collection(repositories)
+      repositories.map { |repo| [repo[:full_name], repo[:id]] }
     end
   end
 end
