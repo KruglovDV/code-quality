@@ -3,12 +3,10 @@
 class EslintStrategy
   def initialize(repository_dir)
     @repository_dir = repository_dir
-    @install_deps_command = "cd #{@repository_dir} && npm i -D"
-    @check_command = "node_modules/eslint/bin/eslint.js -c .eslintrc.yml --format=json --ext js #{@repository_dir}"
+    @check_command = "node_modules/eslint/bin/eslint.js --no-eslintrc -c .eslintrc.yml --format=json --ext js #{@repository_dir}"
   end
 
   def call
-    Open3.pipeline(@install_deps_command)
     stdout, exit_status = Open3.popen3(@check_command) do |_stdin, stdout, _stderr, wait_thr|
       [stdout.read, wait_thr.value]
     end
@@ -20,7 +18,7 @@ class EslintStrategy
   private
 
   def prepare_issues(issues)
-    issues.map do |file|
+    parsed_issues = issues.map do |file|
       issues = []
 
       if file['messages'].count
@@ -33,6 +31,9 @@ class EslintStrategy
         file: file['filePath'],
         issues: issues
       }
+    end
+    parsed_issues.filter do |file|
+      file[:issues].count.positive?
     end
   end
 end

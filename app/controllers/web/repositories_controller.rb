@@ -2,17 +2,19 @@
 
 module Web
   class RepositoriesController < ApplicationController
-    include Pundit::Authorization
-
     before_action :authenticate_user!
 
     def index
       @repositories = current_user.repositories.order('updated_at DESC').includes(:checks)
+      @repositories_last_checks = @repositories.each_with_object({}) do |repo, acc|
+        acc[repo.id] = repo.checks.order('created_at DESC').first
+      end
     end
 
     def new
       @repository = Repository.new
       @user_repositories = user_github_repositories
+      @repositories_collection = @user_repositories.map { |repo| [repo[:full_name], repo[:id]] }
     end
 
     def create

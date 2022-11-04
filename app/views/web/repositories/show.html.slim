@@ -31,6 +31,6 @@
         tr
           td = link_to check.id, repository_check_path(@repository.id, check.id)
           td = check.aasm.human_state
-          td = commit_link(check)
+          td = commit_link(check, @repository)
           td = check_status(check)
           td = l check.created_at

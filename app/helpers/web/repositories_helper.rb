@@ -7,14 +7,9 @@ module Web::RepositoriesHelper
     check&.passed
   end
 
-  def last_check_status(repository)
-    check = repository.checks.order('created_at DESC').first
-    check_status(check)
-  end
-
-  def commit_link(check)
+  def commit_link(check, repository)
     return nil if check.commit.nil?
 
-    link_to check.commit, "https://github.com/#{check.repository.full_name}/commit/#{check.commit}"
+    link_to check.commit, "https://github.com/#{repository.full_name}/commit/#{check.commit}"
   end
 end

@@ -21,10 +21,4 @@ class Repository::Check < ApplicationRecord
       transitions from: :checking, to: :finished
     end
   end
-
-  def parsed_issues
-    return [] if self[:issues].nil?
-
-    JSON.parse(self[:issues])
-  end
 end
