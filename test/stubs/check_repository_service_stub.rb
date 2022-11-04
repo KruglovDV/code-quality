@@ -7,7 +7,7 @@ class CheckRepositoryServiceStub
     check.repository.update(
       language: 'JavaScript',
       full_name: 'user/repo',
-      name: 'repo',
+      name: 'repo'
     )
     { success: true }
   end
