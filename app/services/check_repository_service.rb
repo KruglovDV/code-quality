@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
-require_relative './lint_strategies/strategies_factory'
-
 class CheckRepositoryService
-  def initialize
-    @repository_dir = './repository'
-    @commit_command = "cd #{@repository_dir} && git rev-parse --short HEAD"
-    @clear_command = "rm -rf #{@repository_dir}"
-  end
-
-  def call(check)
+  def self.call(check)
     repository = check.repository
     client = ApplicationContainer[:github_client].new
 
@@ -23,22 +15,19 @@ class CheckRepositoryService
       )
     end
 
-    Open3.popen3(@clear_command)
-    Git.clone(repository.clone_url, 'repository')
+    Open3.popen3(clear_command(check))
+    Git.clone(repository.clone_url, repository_dir(check))
 
-    commit = Open3.popen3(@commit_command) do |_stdin, stdout, _stderr, _wait_thr|
+    commit = Open3.popen3(commit_command(check)) do |_stdin, stdout, _stderr, _wait_thr|
       stdout.read
     end
 
-    strategy = ::StrategiesFactory.new.build(repository.language, @repository_dir)
-    lint_result = strategy.call
-
-    passed = lint_result[:issues].count.zero?
+    lint_result = lint_strategy(repository).call(repository_dir(check))
 
     check.update(
-      issues: JSON.generate(lint_result[:issues]),
+      issues: JSON.generate(lint_result),
       commit: commit,
-      passed: passed
+      passed: lint_result.count.zero?
     )
     check.success!
     { success: true }
@@ -48,6 +37,22 @@ class CheckRepositoryService
     check.fail!
     { success: false }
   ensure
-    Open3.popen3(@clear_command)
+    Open3.popen3(clear_command(check))
+  end
+
+  private_class_method def self.lint_strategy(repository)
+    "::LintStrategies::#{repository.language}Strategy".constantize
+  end
+
+  private_class_method def self.repository_dir(check)
+    "repository_#{check.id}"
+  end
+
+  private_class_method def self.commit_command(check)
+    "cd #{repository_dir(check)} && git rev-parse --short HEAD"
+  end
+
+  private_class_method def self.clear_command(check)
+    "rm -rf #{repository_dir(check)}"
   end
 end

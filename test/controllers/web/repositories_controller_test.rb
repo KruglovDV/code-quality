@@ -9,6 +9,13 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test 'opens show page' do
+    sign_in(users(:sam))
+    repository = repositories(:react)
+    get repository_path(repository)
+    assert_response :success
+  end
+
   test 'opens new repository page' do
     sign_in(users(:sam))
     get new_repository_path
@@ -16,16 +23,16 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'creates new repository' do
-    assert_difference('Repository::Check.count') do
-      sign_in(users(:sam))
+    sign_in(users(:sam))
 
-      create_repository_params = { github_id: 3 }
-      post repositories_path, params: { repository: create_repository_params }
+    create_repository_params = { github_id: 3 }
+    post repositories_path, params: { repository: create_repository_params }
 
-      created_repository = Repository.find_by(create_repository_params)
+    created_repository = Repository.find_by(create_repository_params)
 
-      assert created_repository
-      assert_redirected_to repositories_path
-    end
+    assert created_repository
+    assert_redirected_to repositories_path
+    assert { created_repository.checks.count == 1 }
+    assert { created_repository.checks.last.passed == true }
   end
 end

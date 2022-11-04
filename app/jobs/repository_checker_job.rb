@@ -8,7 +8,7 @@ class RepositoryCheckerJob < ApplicationJob
     return if @check.nil?
 
     @check.check!
-    @result = ApplicationContainer[:check_repository_service].new.call(@check)
+    @result = ApplicationContainer[:check_repository_service].call(@check)
     return if @result[:success]
 
     UserMailer.with(check: @check).check_failed_email.deliver_later

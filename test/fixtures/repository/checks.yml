@@ -1,8 +1,3 @@
 react_first_check:
   aasm_state: created
   repository: react
-
-vue_first_check:
-  aasm_state: created
-  repository: vue
-

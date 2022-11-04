@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
-require_relative './eslint_strategy'
-require_relative './rubocop_strategy'
-
-class StrategiesFactory
-  def initialize
-    @language_to_strategy = {
-      'JavaScript' => ::EslintStrategy,
-      'Ruby' => ::RubocopStrategy
-    }
+class LintStrategies::StrategiesFactory
+  def self.build(language)
+    language_to_strategy[language]
   end
 
-  def build(language, repository_dir)
-    strategy = @language_to_strategy[language]
-    strategy.new(repository_dir)
+  private_class_method def self.language_to_strategy
+    @language_to_strategy = {
+      'JavaScript' => ::LintStrategies::EslintStrategy,
+      'Ruby' => ::LintStrategies::RubocopStrategy
+    }
   end
 end

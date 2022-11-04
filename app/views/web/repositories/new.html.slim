@@ -1,4 +1,6 @@
 .p-4.align-items-center.border.shadow.bg-white.rounded-3
   .mb-4
     h1 = t('.header')
-  = render 'form', repository: @repository, repositories_collection: @repositories_collection
+  = render 'form', \
+    repository: @repository, \
+    repositories_collection: @repositories_collection
