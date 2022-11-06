@@ -11,4 +11,12 @@ class Web::Repositories::ChecksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test 'creates check' do
+    sign_in(users(:john))
+    repository = repositories(:vue)
+    post repository_checks_path(repository)
+    assert_redirected_to repository_path(repository)
+    assert { repository.checks.count == 1 }
+  end
 end

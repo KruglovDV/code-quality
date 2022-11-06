@@ -13,8 +13,7 @@ module Web
 
     def new
       @repository = Repository.new
-      @user_repositories = user_github_repositories
-      @repositories_collection = repositories_collection(@user_repositories)
+      @repositories_collection = repositories_collection
     end
 
     def create
@@ -26,15 +25,13 @@ module Web
         SetWebHookJob.perform_later(@repository.id)
         redirect_to repositories_path, notice: t('.repository_created')
       else
-        @user_repositories = user_github_repositories
-        @repositories_collection = repositories_collection(@user_repositories)
+        @repositories_collection = repositories_collection
         render :new, status: :unprocessable_entity
       end
     end
 
     def show
-      @repository = Repository.find(params[:id])
-      authorize @repository
+      @repository = current_user.repositories.find(params[:id])
       @checks = @repository.checks.order('created_at DESC')
     end
 
@@ -44,14 +41,11 @@ module Web
       params.require(:repository).permit(:github_id)
     end
 
-    def user_github_repositories
-      current_user.user_repositories.filter do |repo|
+    def repositories_collection
+      user_repositories = current_user.user_repositories.filter do |repo|
         Repository.language.find_value repo[:language]
       end
-    end
-
-    def repositories_collection(repositories)
-      repositories.map { |repo| [repo[:full_name], repo[:id]] }
+      user_repositories.map { |repo| [repo[:full_name], repo[:id]] }
     end
   end
 end

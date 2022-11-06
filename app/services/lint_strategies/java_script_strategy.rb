@@ -10,10 +10,8 @@ class LintStrategies::JavaScriptStrategy
   end
 
   private_class_method def self.prepare_issues(issues)
-    parsed_issues = issues.map do |file|
-      file_issues = []
-
-      if file['messages'].count
+    issues.reduce([]) do |acc, file|
+      if file['messages'].count.positive?
         file_issues = file['messages'].map do |issue|
           {
             message: issue['message'],
@@ -22,15 +20,13 @@ class LintStrategies::JavaScriptStrategy
             column: issue['column']
           }
         end
+        acc << {
+          file: file['filePath'],
+          issues: file_issues
+        }
+      else
+        acc
       end
-
-      {
-        file: file['filePath'],
-        issues: file_issues
-      }
-    end
-    parsed_issues.filter do |file|
-      file[:issues].count.positive?
     end
   end
 

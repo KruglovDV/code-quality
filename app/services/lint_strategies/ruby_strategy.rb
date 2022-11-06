@@ -10,9 +10,8 @@ class LintStrategies::RubyStrategy
   end
 
   private_class_method def self.prepare_issues(issues)
-    parsed_issues = issues['files'].map do |file|
-      file_issues = []
-      if file['offenses'].count
+    issues['files'].reduce([]) do |acc, file|
+      if file['offenses'].count.positive?
         file_issues = file['offenses'].map do |offence|
           {
             message: offence['message'],
@@ -21,14 +20,13 @@ class LintStrategies::RubyStrategy
             column: offence['location']['column']
           }
         end
+        acc << {
+          file: file['path'],
+          issues: file_issues
+        }
+      else
+        acc
       end
-      {
-        file: file['path'],
-        issues: file_issues
-      }
-    end
-    parsed_issues.filter do |file|
-      file[:issues].count.positive?
     end
   end
 
