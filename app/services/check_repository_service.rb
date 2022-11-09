@@ -1,20 +1,7 @@
 # frozen_string_literal: true
 
 class CheckRepositoryService
-  def self.call(check)
-    repository = check.repository
-    client = ApplicationContainer[:github_client].new
-
-    if repository.clone_url.nil?
-      @repository_info = client.repository(repository.github_id)
-      repository.update(
-        name: @repository_info[:name],
-        full_name: @repository_info[:full_name],
-        language: @repository_info[:language],
-        clone_url: @repository_info[:clone_url]
-      )
-    end
-
+  def self.call(check, repository)
     Open3.popen3(clear_command(check))
     Git.clone(repository.clone_url, repository_dir(check))
 

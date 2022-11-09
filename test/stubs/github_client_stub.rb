@@ -8,4 +8,13 @@ class GithubClientStub
   end
 
   def create_hook(_repo, _service, _host_config, _event); end
+
+  def repository(_id)
+    {
+      name: 'test_repo',
+      full_name: 'test_repo',
+      language: 'JavaScript',
+      clone_url: 'https://github.com/'
+    }
+  end
 end

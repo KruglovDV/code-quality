@@ -24,15 +24,13 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
   test 'creates new repository' do
     sign_in(users(:sam))
-
     create_repository_params = { github_id: 3 }
     post repositories_path, params: { repository: create_repository_params }
 
     created_repository = Repository.find_by(create_repository_params)
 
     assert created_repository
+    assert { created_repository.loaded_from_github? == true }
     assert_redirected_to repositories_path
-    assert { created_repository.checks.count == 1 }
-    assert { created_repository.checks.last.passed == true }
   end
 end

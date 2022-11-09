@@ -20,9 +20,7 @@ module Web
       @repository = current_user.repositories.build(repository_params)
 
       if @repository.save
-        @check = @repository.checks.create
-        RepositoryCheckerJob.perform_later(@check.id)
-        SetWebHookJob.perform_later(@repository.id)
+        LoadRepositoryJob.perform_later(@repository.id)
         redirect_to repositories_path, notice: t('.repository_created')
       else
         @repositories_collection = repositories_collection
