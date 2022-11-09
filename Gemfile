@@ -34,6 +34,9 @@ gem 'enumerize'
 gem 'faker'
 gem 'flash_rails_messages'
 gem 'git'
+gem 'net-imap', require: false
+gem 'net-pop', require: false
+gem 'net-smtp', require: false
 gem 'octokit'
 gem 'omniauth'
 gem 'omniauth-github'
