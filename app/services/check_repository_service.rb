@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 class CheckRepositoryService
-  def self.call(check, repository)
+  def self.call(check)
+    repository = check.repository
+
+    return { success: false } if repository.load_failed? || repository.created?
+
+    raise ::JobExceptions::RepositoryNotLoadedException if repository.loading?
+
     Open3.popen3(clear_command(check))
     Git.clone(repository.clone_url, repository_dir(check))
 
@@ -18,6 +24,8 @@ class CheckRepositoryService
     )
     check.success!
     { success: true }
+  rescue ::JobExceptions::RepositoryNotLoadedException
+    raise ::JobExceptions::RepositoryNotLoadedException
   rescue StandardError => e
     Rails.logger.fatal(e)
     check.update({ passed: false })
