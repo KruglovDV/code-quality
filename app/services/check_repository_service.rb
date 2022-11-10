@@ -11,7 +11,7 @@ class CheckRepositoryService
     Open3.popen3(clear_command(check))
     Git.clone(repository.clone_url, repository_dir(check))
 
-    commit = Open3.popen3(commit_command(check)) do |_stdin, stdout, _stderr, _wait_thr|
+    commit_hash = Open3.popen3(commit_command(check)) do |_stdin, stdout, _stderr, _wait_thr|
       stdout.read
     end
 
@@ -19,7 +19,7 @@ class CheckRepositoryService
 
     check.update(
       issues: JSON.generate(lint_result),
-      commit: commit,
+      commit: commit_hash,
       passed: lint_result.count.zero?
     )
     check.success!
