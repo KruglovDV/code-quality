@@ -8,7 +8,7 @@ class LoadRepositoryJob < ApplicationJob
     return if @repository.nil?
 
     client = ApplicationContainer[:github_client].new(access_token: @repository.user.token, auto_paginate: true)
-    @repository.load!
+    @repository.fetch!
     begin
       @repository_info = client.repository(@repository.github_id)
       @repository.update(
@@ -21,7 +21,6 @@ class LoadRepositoryJob < ApplicationJob
     rescue StandardError => e
       Rails.logger.fatal(e)
       @repository.fail!
-      return
     end
 
     client.create_hook(

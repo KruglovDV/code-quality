@@ -30,7 +30,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     created_repository = Repository.find_by(create_repository_params)
 
     assert created_repository
-    assert { created_repository.loaded_from_github? == true }
+    assert { created_repository.fetched? == true }
     assert_redirected_to repositories_path
   end
 end

@@ -4,9 +4,9 @@ class CheckRepositoryService
   def self.call(check)
     repository = check.repository
 
-    return { success: false } if repository.load_failed? || repository.created?
+    return { success: false } if repository.fetch_failed? || repository.created?
 
-    raise ::JobExceptions::RepositoryNotLoadedException if repository.loading?
+    raise ::JobExceptions::RepositoryNotLoadedException if repository.fetching?
 
     Open3.popen3(clear_command(check))
     Git.clone(repository.clone_url, repository_dir(check))

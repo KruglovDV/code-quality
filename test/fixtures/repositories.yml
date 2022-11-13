@@ -5,11 +5,11 @@ react:
   full_name: react
   language: JavaScript
   user: sam
-  aasm_state: loaded_from_github
+  aasm_state: fetched
 
 vue:
   github_id: 2
   full_name: vue
   language: JavaScript
   user: john
-  aasm_state: loaded_from_github
+  aasm_state: fetched

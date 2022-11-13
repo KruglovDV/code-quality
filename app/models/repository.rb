@@ -12,18 +12,18 @@ class Repository < ApplicationRecord
 
   aasm do
     state :created, initial: true
-    state :loading, :loaded_from_github, :load_failed
+    state :fetching, :fetched, :fetch_failed
 
-    event :load do
-      transitions from: :created, to: :loading
+    event :fetch do
+      transitions from: :created, to: :fetching
     end
 
     event :fail do
-      transitions from: :loading, to: :load_failed
+      transitions from: :fetching, to: :fetch_failed
     end
 
     event :success do
-      transitions from: :loading, to: :loaded_from_github
+      transitions from: :fetching, to: :fetched
     end
   end
 end
